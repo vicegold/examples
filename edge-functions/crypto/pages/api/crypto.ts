@@ -23,10 +23,10 @@ export default async function CryptoEdgeAPIRoute(request: NextRequest) {
   // Encrypt
   const iv = crypto.getRandomValues(new Uint8Array(12))
   const alg = { name: 'AES-GCM', iv: iv }
-  const encrpytKey = await crypto.subtle.importKey('raw', pwHash, alg, false, [
+  const encryptKey = await crypto.subtle.importKey('raw', pwHash, alg, false, [
     'encrypt',
   ])
-  const encrypted = await crypto.subtle.encrypt(alg, encrpytKey, ptUtf8)
+  const encrypted = await crypto.subtle.encrypt(alg, encryptKey, ptUtf8)
 
   // Decrypt
   const decryptKey = await crypto.subtle.importKey('raw', pwHash, alg, false, [
